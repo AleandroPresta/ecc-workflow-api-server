@@ -22,6 +22,6 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homepage),
+    path('', views.getRequest),
     path('api/compare', include('api.urls')),
 ]
