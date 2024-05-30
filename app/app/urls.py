@@ -22,6 +22,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.getRequest),
+    path('', views.homepage),
+    path('docs/', views.docs),
     path('api/compare', include('api.urls')),
 ]

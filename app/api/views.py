@@ -5,7 +5,7 @@ from .lib.workflow_catalog_evaluator import compare_workflow_and_catalog
 
 # Print data posted to the server
 @api_view(['POST'])
-def postData(request):
+def process_post_data(request):
     # Recieve data from POST request
     request_body = json.loads(request.body)
     workflow = request_body[0]
