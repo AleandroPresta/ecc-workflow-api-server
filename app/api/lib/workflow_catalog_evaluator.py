@@ -4,14 +4,20 @@ def compare_workflow_and_catalog(workflow, catalog):
     """
     return find_feasible_solution(workflow, catalog)
 
+# Selects services for each node in the workflow. The services selected are the first
+# occurences in the catalog that have parameters greater than or equal to the node parameters.
 def find_feasible_solution(workflow, catalog):
     solution = {}
 
+    # Iterate through each node in the workflow
     for node in workflow['nodes']:
+        # Check if node is a device (we esclude devices because they have no parameters)
         if node['type'] != 'Device':
             best_service = None
             best_service_params = {}
+            # Iterate through each service in the catalog
             for service in catalog['services']:
+                # Check if service type matches node type
                 if service['type'] == node['type']:
                     # Convert parameters to integers for comparison
                     workflow_params = {param: int(value) for param, value in node['parameters'].items()}
@@ -24,7 +30,7 @@ def find_feasible_solution(workflow, catalog):
                         if not best_service or len(service_params) > len(best_service_params):
                             best_service = service
                             best_service_params = service_params
-
+                            
             if best_service:
                 solution[node['id']] = best_service
 
