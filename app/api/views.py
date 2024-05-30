@@ -9,10 +9,10 @@ def process_post_data(request):
     # Recieve data from POST request
     request_body = json.loads(request.body)
     workflow = request_body[0]
-    print(f'Workflow: {workflow}')
+    print(f'\n-----Workflow-----\n {workflow}')
     
     catalog = request_body[1]
-    print(f"Catalog: {catalog}")
+    print(f"\n-----Catalog-----\n {catalog}")
     
     result = compare_workflow_and_catalog(workflow, catalog)
     # pretty_request_body = json.dumps(request_body, indent=4)
