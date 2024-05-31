@@ -1,11 +1,17 @@
-def compare_workflow_and_catalog(workflow, catalog):
-    """
+"""
     Compare a workflow and a catalog
-    """
+    :param workflow: The workflow to compare
+    :param catalog: The catalog to compare
+    :return: A dictionary of the services selected for each node in the workflow
+"""
+def compare_workflow_and_catalog(workflow, catalog):
     return find_feasible_solution(workflow, catalog)
 
-# Selects services for each node in the workflow. The services selected are the first
-# occurences in the catalog that have parameters greater than or equal to the node parameters.
+''' 
+    Selects services for each node in the workflow. The services selected are the first
+    occurences in the catalog that have parameters greater than or equal to the node parameters.
+    If a service is selected, it is removed from the catalog and added to the solution.
+ '''
 def find_feasible_solution(workflow, catalog):
     solution = {}
     # Copy the catalog as available services
