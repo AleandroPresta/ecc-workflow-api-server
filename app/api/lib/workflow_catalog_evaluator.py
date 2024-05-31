@@ -45,5 +45,5 @@ def find_feasible_solution(workflow, catalog):
                 available_services['services'].remove(best_service)
                 # Add selected service to solution
                 solution[node['id']] = best_service
-
+                
     return solution
