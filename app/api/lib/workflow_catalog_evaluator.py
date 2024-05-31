@@ -8,6 +8,8 @@ def compare_workflow_and_catalog(workflow, catalog):
 # occurences in the catalog that have parameters greater than or equal to the node parameters.
 def find_feasible_solution(workflow, catalog):
     solution = {}
+    # Copy the catalog as available services
+    available_services = catalog.copy()
 
     # Iterate through each node in the workflow
     for node in workflow['nodes']:
@@ -16,15 +18,16 @@ def find_feasible_solution(workflow, catalog):
             best_service = None
             best_service_params = {}
             # Iterate through each service in the catalog
-            for service in catalog['services']:
+            for service in available_services['services']:
                 # Check if service type matches node type
                 if service['type'] == node['type']:
                     # Convert parameters to integers for comparison
                     workflow_params = {param: int(value) for param, value in node['parameters'].items()}
                     service_params = {param: int(value) for param, value in service['parameters'].items()}
                     
-                    # Check if service parameters are greater than or equal to node parameters
+                    # greater_params is True if all service parameters are greater than or equal to node parameters
                     greater_params = all(service_params.get(param, 0) >= workflow_params.get(param, 0) for param in workflow_params)
+                    
                     if greater_params:
                         # Check if service parameters are less than or equal to node parameters
                         if not best_service or len(service_params) > len(best_service_params):
@@ -32,6 +35,9 @@ def find_feasible_solution(workflow, catalog):
                             best_service_params = service_params
                             
             if best_service:
+                # Remove selected service from available services
+                available_services['services'].remove(best_service)
+                # Add selected service to solution
                 solution[node['id']] = best_service
 
     return solution

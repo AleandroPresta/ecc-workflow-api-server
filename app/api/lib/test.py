@@ -5,28 +5,16 @@ def get_sample_data():
     workflow = {
         'nodes': [
             {
-                'name': 'Computation',
+                'name': 'Computation 1',
                 'id': 1,
                 'type': 'Computation',
                 'parameters': {'executionTime': 10, 'volumeOfData': 25},
-                'description': 'This is a computation',
-                'x': 418,
-                'y': 138,
-                'inputConnectors': [{'name': 'in_1_0'}],
-                'outputConnectors': [{'name': 'out_1_0'}],
-                'width': 250
             },
             {
-                'name': 'Storage',
+                'name': 'Computation 2',
                 'id': 2,
-                'type': 'Storage',
-                'parameters': {'availableMemory': 25},
-                'description': 'This is a storage',
-                'x': 687,
-                'y': 296,
-                'inputConnectors': [{'name': 'in_2_0'}],
-                'outputConnectors': [{'name': 'out_2_0'}],
-                'width': 250
+                'type': 'Computation',
+                'parameters': {'executionTime': 10, 'volumeOfData': 25},
             }
         ]
     }
