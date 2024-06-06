@@ -3,7 +3,7 @@ from utils import pretty_print_solution
 
 def get_sample_data():
     workflow = {
-        'nodes': [
+        'nodes': [            
             {
                 'name': 'Computation 1',
                 'id': 1,
@@ -28,11 +28,6 @@ def get_sample_data():
                 'type': 'Storage',
                 'parameters': {'availableMemory': 20},
             },
-            {
-                'name': 'Communication 1',
-                'id': 5,
-                'type': 'Communication',
-            }
         ]
     }
 
@@ -42,49 +37,49 @@ def get_sample_data():
                 'name': 'Service 0',
                 'id': 0,
                 'type': 'Computation',
-                'parameters': {'executionTime': '5', 'volumeOfData': '25'},
+                'parameters': {'executionTime': 5, 'volumeOfData': 25},
                 'description': 'This is a computation service'
             },
             {
                 'name': 'Service 1',
                 'id': 1,
                 'type': 'Computation',
-                'parameters': {'executionTime': '11', 'volumeOfData': '25'},
+                'parameters': {'executionTime': 11, 'volumeOfData': 25},
                 'description': 'This is a computation service'
             },
             {
                 'name': 'Service 2',
                 'id': 2,
                 'type': 'Computation',
-                'parameters': {'executionTime': '12', 'volumeOfData': '35'},
+                'parameters': {'executionTime': 12, 'volumeOfData': 35},
                 'description': 'This is a computation service'
             },
             {
                 'name': 'Service 3',
                 'id': 3,
                 'type': 'Storage',
-                'parameters': {'availableMemory': '20'},
+                'parameters': {'availableMemory': 20},
                 'description': 'This is a storage service'
             },
             {
                 'name': 'Service 4',
                 'id': 4,
                 'type': 'Storage',
-                'parameters': { 'availableMemory': '15'},
+                'parameters': { 'availableMemory': 15},
                 'description': 'This is a storage service'
             },
             {
                 'name': 'Service 5',
                 'id': 5,
                 'type': 'Storage',
-                'parameters': { 'availableMemory': '30'},
+                'parameters': { 'availableMemory': 30},
                 'description': 'This is a storage service'
             },
             {
                 'name': 'Service 6',
                 'id': 6,
                 'type': 'Storage',
-                'parameters': {'availableMemory': '25'},
+                'parameters': {'availableMemory': 25},
                 'description': 'This is a storage service'
             },
         ]
