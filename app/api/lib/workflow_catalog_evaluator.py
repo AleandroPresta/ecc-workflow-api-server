@@ -49,8 +49,7 @@ def find_feasible_solution(workflow, catalog):
                 solution[node['id']] = best_service
                 
     # Check if the solution covers all the services
-    print(f'Solution covers {len(solution)} services')
-    print(f'Workflow has {len(workflow["nodes"])} nodes')
+    print(f'The solution covers {len(solution)} services out of {len(workflow["nodes"])} nodes.')
     if len(solution) != len(workflow['nodes']):
         return None # No solution found
     return solution
