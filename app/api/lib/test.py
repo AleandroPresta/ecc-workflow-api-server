@@ -1,5 +1,5 @@
 from workflow_catalog_evaluator import compare_workflow_and_catalog
-import json
+from utils import pretty_print_solution
 
 def get_sample_data():
     workflow = {
@@ -15,6 +15,23 @@ def get_sample_data():
                 'id': 2,
                 'type': 'Computation',
                 'parameters': {'executionTime': 10, 'volumeOfData': 25},
+            },
+            {
+                'name': 'Storage 1',
+                'id': 3,
+                'type': 'Storage',
+                'parameters': {'availableMemory': 20},
+            },
+            {
+                'name': 'Storage 2',
+                'id': 4,
+                'type': 'Storage',
+                'parameters': {'availableMemory': 20},
+            },
+            {
+                'name': 'Communication 1',
+                'id': 5,
+                'type': 'Communication',
             }
         ]
     }
@@ -53,7 +70,7 @@ def get_sample_data():
                 'name': 'Service 4',
                 'id': 4,
                 'type': 'Storage',
-                'parameters': { 'availableMemory': '26'},
+                'parameters': { 'availableMemory': '15'},
                 'description': 'This is a storage service'
             },
             {
@@ -74,14 +91,12 @@ def get_sample_data():
     }
     
     return [workflow, catalog]
-
-def pretty_print_solution(solution):
-        print(json.dumps(solution, indent=4))
     
 def main():
     [workflow, catalog] = get_sample_data()
     solution = compare_workflow_and_catalog(workflow, catalog)
     # Pretty print the solution
+    print('Solution:')
     pretty_print_solution(solution)
     
 main()
