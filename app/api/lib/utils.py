@@ -165,9 +165,47 @@ def extract_search_space(catalog):
     return search_space
 
 '''
-    Given an inequalities system and a search space, it solves the inequalities system.
-    Given the need to explicitly define the symbols for the variables, this function is not generic,
-    it needs to be adapted to the specific variables used in the inequalities (in this case executionTime and volumeOfData).
+    Extract the symbols for the inequalities. It is necessary to have symbols in order to solve the inequalities with the library sympy.
+    Example of usage:
+        input:
+        workflow = {
+            'nodes': [            
+                {
+                    'name': 'Computation 1',
+                    'id': 1,
+                    'type': 'Computation',
+                    'parameters': [
+                        {
+                            'name' : 'executionTime',
+                            'value': 10,
+                            'type': '<='
+                        },
+                        {
+                            'name': 'volumeOfData',
+                            'value': 25,
+                            'type': '>='
+                        },    
+                    ],
+                },
+                ...
+            ]
+        }
+        output:
+        ['executionTime', 'volumeOfData']
+        
+        NOTE: it extracts the symbols from the first node. If the symbols are different in other nodes, it will not work.
+'''
+def extract_symbols(workflow):
+    ineq_symbols = []
+    # Takes a reference node and extracts the symbols from the parameters
+    reference_node = workflow['nodes'][0]
+    parameters = reference_node.get('parameters', [])
+    for parameter in parameters:
+        ineq_symbols.append(parameter['name'])
+    return ineq_symbols
+
+'''
+    Given an inequalities system and a search space and a set of symbols (in string format) for the inequalities, it solves the inequalities system.
     Example of usage:
         input:
         inequalities = [
@@ -181,15 +219,16 @@ def extract_search_space(catalog):
             (11, 26), 
             (9, 30)
         ]
+        symbols_string = 'executionTime volumeOfData'
         output:
         [
             [(5, 25), (10, 30), (9, 30)],
             [(12, 25), (11, 26)]
         ]
 '''
-def solve_computation_inequalities(inequalities, search_space):
+def solve_computation_inequalities(inequalities, search_space, symbols_string):
     # Define symbols for variables
-    executionTime, volumeOfData = symbols('executionTime volumeOfData')
+    ineq_symbles = symbols(symbols_string)
     
     solutions = []
     
@@ -197,7 +236,12 @@ def solve_computation_inequalities(inequalities, search_space):
         print(f"Solving inequality: {ineq}")
         solutions_set = []
         for point in search_space:
-            satisfies_inequalities = ineq.subs({executionTime: point[0], volumeOfData: point[1]})
+            if (len(point) != len(ineq_symbles)):
+                raise ValueError('The number of variables in the point does not match the number of variables in the inequalities')
+            
+            satisfies_inequalities = ineq.subs(
+                {symbol: value for symbol, value in zip(ineq_symbles, point)}
+            )
             if satisfies_inequalities:
                 solutions_set.append(point)
         solutions.append(solutions_set)

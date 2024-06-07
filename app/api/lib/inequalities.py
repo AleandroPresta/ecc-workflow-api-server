@@ -1,4 +1,5 @@
-from utils import find_closest_solution, extract_inequalities, extract_search_space, parse_inequalities, solve_computation_inequalities, extract_reference_points, euclidean_distance
+from utils import find_closest_solution, extract_inequalities, extract_search_space, parse_inequalities, solve_computation_inequalities, \
+    extract_reference_points, euclidean_distance, extract_symbols
 
 workflow = {
     'nodes': [            
@@ -107,7 +108,8 @@ search_space = extract_search_space(catalog)
 print("Search space:" , search_space)
 
 # Define a list to hold the solutions
-solutions = solve_computation_inequalities(inequalities, search_space)
+symbols_string = extract_symbols(workflow)
+solutions = solve_computation_inequalities(inequalities, search_space, symbols_string)
 print("Solutions:", solutions)
 
 closest_solutions = find_closest_solution(reference_points, solutions, distance_function=euclidean_distance)
