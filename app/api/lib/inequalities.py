@@ -1,7 +1,4 @@
-from sympy import symbols, And, solveset
-from utils import closest_point, extract_inequalities, extract_search_space
-from sympy.parsing.sympy_parser import parse_expr
-
+from utils import find_closest_solution, extract_inequalities, extract_search_space, parse_inequalities, solve_computation_inequalities, extract_reference_points, euclidean_distance
 
 workflow = {
     'nodes': [            
@@ -80,35 +77,29 @@ catalog = {
                 'volumeOfData': 26
             },
         },
+        {
+            'name': 'Service 4',
+            'id': 4,
+            'type': 'Computation',
+            'parameters': {
+                'executionTime': 9, 
+                'volumeOfData': 30
+            },
+        }
+
     ]
 }
-
-# Define symbols for variables
-executionTime, volumeOfData = symbols('executionTime volumeOfData')
-
+    
 # Extract the points from the workflow
 ineq_sets = extract_inequalities(workflow)
 
+# Extract the reference points
+reference_points = extract_reference_points(workflow)
+print(f'Reference points: {reference_points}')
+
 # Define a list to hold the inequalities
-inequalities = []
-
-# Construct inequalities for each point
-for sets in ineq_sets:
-    set = []
-    for expression in sets:
-        e = f'{expression[0]} {expression[1]} {expression[2]}'
-        parsed_e = parse_expr(e)
-        set.append(parsed_e)
-    inequalities.append(And(*set))
-    
-print("Inequalities:", inequalities)    
-
-'''# Combine all inequalities with 'And'
-combined_inequalities = []
-for ineq in inequalities:
-    print(ineq)
-    combined_inequalities.append(And(*ineq))
-print("Combined inequalities:", combined_inequalities)
+inequalities = parse_inequalities(ineq_sets)
+print("Inequalities:", inequalities)
 
 # Define a list of points (example)
 # Extract the search space from the catalog
@@ -116,12 +107,8 @@ search_space = extract_search_space(catalog)
 print("Search space:" , search_space)
 
 # Define a list to hold the solutions
-solutions = []
+solutions = solve_computation_inequalities(inequalities, search_space)
+print("Solutions:", solutions)
 
-# Check each point against the inequalities
-for point in search_space:
-    satisfies_inequalities = all(ineq.subs({executionTime: point[0], volumeOfData: point[1]}) for ineq in inequalities)
-    if satisfies_inequalities:
-        solutions.append(point)
-
-print("Solutions:", solutions) '''
+closest_solutions = find_closest_solution(reference_points, solutions, distance_function=euclidean_distance)
+print("Closest solutions:", closest_solutions)
