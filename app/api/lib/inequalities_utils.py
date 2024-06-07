@@ -126,8 +126,12 @@ def parse_inequalities(inequalities_set):
     for sets in inequalities_set:
         set = []
         for expression in sets:
-            e = f'{expression[0]} {expression[1]} {expression[2]}'
+            if(expression[1] == '=='):
+                e = f'Eq({expression[0]},{expression[2]})'
+            else:
+                e = f'{expression[0]} {expression[1]} {expression[2]}'
             parsed_e = parse_expr(e)
+            print(f'parsed_e: {parsed_e}')
             set.append(parsed_e)
         inequalities.append(And(*set))
     return inequalities
@@ -233,7 +237,6 @@ def solve_computation_inequalities(inequalities, search_space, symbols_string):
     solutions = []
     
     for ineq in inequalities:
-        print(f"Solving inequality: {ineq}")
         solutions_set = []
         for point in search_space:
             if (len(point) != len(ineq_symbles)):
