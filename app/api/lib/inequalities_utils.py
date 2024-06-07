@@ -131,7 +131,6 @@ def parse_inequalities(inequalities_set):
             else:
                 e = f'{expression[0]} {expression[1]} {expression[2]}'
             parsed_e = parse_expr(e)
-            print(f'parsed_e: {parsed_e}')
             set.append(parsed_e)
         inequalities.append(And(*set))
     return inequalities
@@ -240,7 +239,7 @@ def solve_computation_inequalities(inequalities, search_space, symbols_string):
         solutions_set = []
         for point in search_space:
             if (len(point) != len(ineq_symbles)):
-                raise ValueError('The number of variables in the point does not match the number of variables in the inequalities')
+                raise ValueError(f'The number of variables in \n{point} \ndoes not match the number of variables in \n {inequalities}\n')
             
             satisfies_inequalities = ineq.subs(
                 {symbol: value for symbol, value in zip(ineq_symbles, point)}
