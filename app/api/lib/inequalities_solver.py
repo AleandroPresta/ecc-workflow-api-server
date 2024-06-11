@@ -1,6 +1,8 @@
 import sys
 sys.path.append('app/api')
 
+from icecream import ic
+
 from lib.inequalities_utils import find_closest_solution, extract_inequalities, extract_search_space, parse_inequalities, solve_computation_inequalities, \
     extract_reference_points, extract_symbols
     
@@ -43,16 +45,12 @@ def find_closest_solution_for_type(type_workflow, type_catalog, distance_functio
     Given a workflow and a catalog, this function finds the closest solution to each node in the
     workflow by dividing the nodes by type and calling the find_closest_solution_for_type function.
 '''
-def function(workflow, catalog, distance_function, VERBOSE=False):
-    print(f'Workflow: {workflow}\n')
-    print(f'Catalog: {catalog}\n')
+def process_workflow_catalog(workflow, catalog, distance_function, VERBOSE=False):
     categorized_workflow = categorize_nodes_by_type(workflow)
     categorized_catalog = categorize_catalog_by_type(catalog)
     
     closest_solutions = {}
     for type_workflow, nodes_workflow in categorized_workflow.items():
-        print(f'Processing type: {type_workflow}\n')
-        print(f'Nodes: {nodes_workflow}\n')
-        print(f'Catalog: {categorized_catalog[type_workflow]}\n')
-        # closest_solutions[type_workflow] = find_closest_solution_for_type(nodes_workflow, categorized_catalog[type_workflow], distance_function, VERBOSE)
+        ic(categorized_workflow[type_workflow])
+        closest_solutions[type_workflow] = find_closest_solution_for_type(categorized_workflow[type_workflow], categorized_catalog[type_workflow], distance_function, VERBOSE)
     return closest_solutions

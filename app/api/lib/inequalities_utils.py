@@ -2,6 +2,7 @@ import json
 import math
 from sympy.parsing.sympy_parser import parse_expr
 from sympy import And, symbols
+from icecream import ic
 
 def pretty_print_solution(solution):
         print(json.dumps(solution, indent=4))

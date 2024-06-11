@@ -1,7 +1,7 @@
 import sys
 sys.path.append('app/api')
 
-from lib.inequalities_solver import find_closest_solution_for_type
+from lib.inequalities_solver import find_closest_solution_for_type, process_workflow_catalog
 from lib.inequalities_utils import euclidean_distance
 
 def test3(VERBOSE=False):
@@ -195,6 +195,9 @@ def test3(VERBOSE=False):
             }
         ]
     }
+    
+    solution = process_workflow_catalog(workflow, catalog, euclidean_distance, VERBOSE)
+    return solution
 
 def test2(VERBOSE=False):
     storage_workflow = {
@@ -427,11 +430,11 @@ def test1(VERBOSE=False):
     return find_closest_solution_for_type(computations_workflow, computations_catalog, euclidean_distance, VERBOSE)
     
 def main():
-    solution1 = test1()
+    '''solution1 = test1()
     print(solution1)
     
     solution2 = test2()
-    print(solution2)
+    print(solution2)'''
     
     solution3 = test3(VERBOSE=True)
     print(solution3)

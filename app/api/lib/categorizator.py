@@ -1,4 +1,7 @@
-from .inequalities_utils import pretty_print_solution
+import sys
+sys.path.append('app/api')
+
+from lib.inequalities_utils import pretty_print_solution
 
 '''
     This function takes a workflow and categorizes the nodes by their type.
@@ -52,13 +55,11 @@ from .inequalities_utils import pretty_print_solution
 '''
 def categorize_nodes_by_type(workflow):
     categorized = {}
-    print(f'Workflow:')
-    pretty_print_solution(workflow)
     for node in workflow['nodes']:
         node_type = node['type']
         if node_type not in categorized:
-            categorized[node_type] = []
-        categorized[node_type].append(node)
+            categorized[node_type] = { 'nodes' : [] }
+        categorized[node_type]['nodes'].append(node)
     return categorized
 
 '''
@@ -104,6 +105,6 @@ def categorize_catalog_by_type(catalog):
     for service in catalog['services']:
         service_type = service['type']
         if service_type not in categorized:
-            categorized[service_type] = []
-        categorized[service_type].append(service)
+            categorized[service_type] = { 'services' : [] }
+        categorized[service_type]['services'].append(service)
     return categorized
