@@ -4,7 +4,7 @@ sys.path.append('app/api')
 from lib.inequalities_solver import find_closest_solution_for_type
 from lib.inequalities_utils import euclidean_distance
 
-'''def test3(VERBOSE=False):
+def test3(VERBOSE=False):
     workflow = {
         'nodes': [
             {
@@ -194,7 +194,7 @@ from lib.inequalities_utils import euclidean_distance
                 },
             }
         ]
-    } '''
+    }
 
 def test2(VERBOSE=False):
     storage_workflow = {
@@ -433,7 +433,7 @@ def main():
     solution2 = test2()
     print(solution2)
     
-    '''solution3 = test3(VERBOSE=True)
-    print(solution3)'''
+    solution3 = test3(VERBOSE=True)
+    print(solution3)
     
 main()
