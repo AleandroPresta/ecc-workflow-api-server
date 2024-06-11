@@ -1,5 +1,5 @@
-from inequalities_utils import find_closest_solution, extract_inequalities, extract_search_space, parse_inequalities, solve_computation_inequalities, \
-    extract_reference_points, euclidean_distance, extract_symbols
+from .inequalities_utils import find_closest_solution, extract_inequalities, extract_search_space, parse_inequalities, solve_computation_inequalities, \
+    extract_reference_points, extract_symbols
 
 def find_closest_solution_for_type(type_workflow, type_catalog, distance_function, VERBOSE):
     # Extract the points from the workflow
@@ -21,22 +21,12 @@ def find_closest_solution_for_type(type_workflow, type_catalog, distance_functio
     closest_solutions = find_closest_solution(reference_points, solutions, distance_function)
     
     if(VERBOSE):
-        print(f'ineq_sets: {ineq_sets}')
-        print(f'Reference points: {reference_points}')
-        print("Inequalities:", inequalities)
-        print("Search space:" , search_space)
-        print("Solutions:", solutions)
-        print("Closest solutions:", closest_solutions)
+        print(f'ineq_sets: {ineq_sets}\n')
+        print(f'Reference points: {reference_points}\n')
+        print(f"Inequalities: {inequalities}\n")
+        print(f"Search space: {search_space}\n")
+        print(f"Solutions: {solutions}\n")
+        print(f"Closest solutions: {closest_solutions}\n")
     
     return closest_solutions
 
-'''def find_closest_solution(workflow, catalog, distance_function):
-    # Create one workflow for each type
-    types_workflow = set([node['type'] for node in workflow['nodes']])
-    # Create one catalog for each type
-    types_catalog = set([service['type'] for service in catalog['services']])
-    
-    solutions = []
-    for type_workflow, type_catalog in zip(types_workflow, types_catalog):
-        solutions.append(find_closest_solution_for_type(type_workflow, type_catalog, distance_function))
-'''

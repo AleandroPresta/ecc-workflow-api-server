@@ -1,5 +1,8 @@
-from inequalities_solver import find_closest_solution_for_type
-from inequalities_utils import euclidean_distance
+import sys
+sys.path.append('app/api')
+
+from lib.inequalities_solver import find_closest_solution_for_type
+from lib.inequalities_utils import euclidean_distance
 
 def test2(VERBOSE=False):
     storage_workflow = {
