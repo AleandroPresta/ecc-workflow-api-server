@@ -1,6 +1,16 @@
-from .inequalities_utils import find_closest_solution, extract_inequalities, extract_search_space, parse_inequalities, solve_computation_inequalities, \
-    extract_reference_points, extract_symbols
+import sys
+sys.path.append('app/api')
 
+from lib.inequalities_utils import find_closest_solution, extract_inequalities, extract_search_space, parse_inequalities, solve_computation_inequalities, \
+    extract_reference_points, extract_symbols
+    
+from lib.categorizator import categorize_nodes_by_type, categorize_catalog_by_type
+
+'''
+    This function finds the closest solution to a given workflow in the catalog. The nodes inside the
+    workflow must have all the same 'type'.
+    Example of usage:
+'''
 def find_closest_solution_for_type(type_workflow, type_catalog, distance_function, VERBOSE):
     # Extract the points from the workflow
     ineq_sets = extract_inequalities(type_workflow)
@@ -29,4 +39,20 @@ def find_closest_solution_for_type(type_workflow, type_catalog, distance_functio
         print(f"Closest solutions: {closest_solutions}\n")
     
     return closest_solutions
-
+'''
+    Given a workflow and a catalog, this function finds the closest solution to each node in the
+    workflow by dividing the nodes by type and calling the find_closest_solution_for_type function.
+'''
+def find_closest_solution(workflow, catalog, distance_function, VERBOSE=False):
+    print(f'Workflow: {workflow}\n')
+    print(f'Catalog: {catalog}\n')
+    '''categorized_workflow = categorize_nodes_by_type(workflow)
+    categorized_catalog = categorize_catalog_by_type(catalog)
+    
+    closest_solutions = {}
+    for type_workflow, nodes_workflow in categorized_workflow.items():
+        print(f'Processing type: {type_workflow}\n')
+        print(f'Nodes: {nodes_workflow}\n')
+        print(f'Catalog: {categorized_catalog[type_workflow]}\n')
+        # closest_solutions[type_workflow] = find_closest_solution_for_type(nodes_workflow, categorized_catalog[type_workflow], distance_function, VERBOSE)
+    return closest_solutions'''
