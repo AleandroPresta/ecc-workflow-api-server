@@ -2,6 +2,7 @@ import sys
 sys.path.append('app/api')
 
 from icecream import ic
+from colorama import Fore, Style
 
 from lib.inequalities_utils import find_closest_solution, extract_inequalities, extract_search_space, parse_inequalities, solve_computation_inequalities, \
     extract_reference_points, extract_symbols
@@ -33,12 +34,12 @@ def find_closest_solution_for_type(type_workflow, type_catalog, distance_functio
     closest_solutions = find_closest_solution(reference_points, solutions, distance_function)
     
     if(VERBOSE):
-        print(f'ineq_sets: {ineq_sets}\n')
-        print(f'Reference points: {reference_points}\n')
-        print(f"Inequalities: {inequalities}\n")
-        print(f"Search space: {search_space}\n")
-        print(f"Solutions: {solutions}\n")
-        print(f"Closest solutions: {closest_solutions}\n")
+        ic(ineq_sets)
+        ic(reference_points)
+        ic(inequalities)
+        ic(search_space)
+        ic(solutions)
+        ic(closest_solutions)
     
     return closest_solutions
 '''
@@ -51,6 +52,5 @@ def process_workflow_catalog(workflow, catalog, distance_function, VERBOSE=False
     
     closest_solutions = {}
     for type_workflow, nodes_workflow in categorized_workflow.items():
-        ic(categorized_workflow[type_workflow])
         closest_solutions[type_workflow] = find_closest_solution_for_type(categorized_workflow[type_workflow], categorized_catalog[type_workflow], distance_function, VERBOSE)
     return closest_solutions
