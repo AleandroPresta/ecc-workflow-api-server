@@ -46,12 +46,30 @@ def closest_point(reference_point, points, distance_function=euclidean_distance)
                         },    
                     ],
                 },
+                {
+                    'name': 'Computation 2',
+                    'id': 2,
+                    'type': 'Computation',
+                    'parameters': [
+                        {
+                            'name' : 'executionTime',
+                            'value': 11,
+                            'type': '<='
+                        },
+                        {
+                            'name': 'volumeOfData',
+                            'value': 26,
+                            'type': '<='
+                        },    
+                    ],
+                }
                 ...
             ]
         }
         output:
         [
-            [('executionTime', '<=', 10), ('volumeOfData', '>=', 25)],
+            [('executionTime', '<=', 10), ('volumeOfData', '>=', 25)], 
+            [('executionTime', '<=', 11), ('volumeOfData', '<=', 26)],
             ...
         ]
 '''
