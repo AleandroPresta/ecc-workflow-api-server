@@ -1,6 +1,23 @@
 import sys
 import os
 
+import logging
+
+logging_level = logging.INFO
+
+# Set up logging
+logging.basicConfig(
+    level=logging_level,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+
+# Check if the logging level is set to DEBUG
+if (logging_level == logging.DEBUG):
+    VERBOSE = True
+else:
+    VERBOSE = False
+
 # Add the parent directory of 'lib' to the sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -432,13 +449,18 @@ def test1(VERBOSE=False):
     return solver.find_closest_solution_for_type(computations_workflow, computations_catalog, utils.euclidean_distance, VERBOSE)
     
 def main():
-    solution1 = test1()
-    print(solution1)
+    logging.info('Testing the inequalities solver')
     
-    solution2 = test2()
-    print(solution2)
+    solution1 = test1(VERBOSE=VERBOSE)
+    logging.debug(f'Solution 1: {solution1}')
     
-    solution3 = test3(VERBOSE=True)
-    print(solution3)
+    solution2 = test2(VERBOSE=VERBOSE)
+    logging.debug(f'Solution 2: {solution2}')
     
-main()
+    solution3 = test3(VERBOSE=VERBOSE)
+    logging.debug(f'Solution 3: {solution3}')
+    
+    logging.info('Completed tests on the inequalities solver')
+    
+if __name__ == '__main__':
+    main()

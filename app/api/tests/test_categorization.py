@@ -7,6 +7,24 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from lib import utils
 from lib import categorizator
 
+import logging
+
+logging_level = logging.DEBUG
+
+# Set up logging
+logging.basicConfig(
+    level=logging_level,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+
+# Check if the logging level is set to DEBUG
+if (logging_level == logging.DEBUG):
+    VERBOSE = True
+else:
+    VERBOSE = False
+
+
 def test_catalog():
     catalog = {
         'services': [

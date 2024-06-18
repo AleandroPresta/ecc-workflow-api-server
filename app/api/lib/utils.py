@@ -4,16 +4,29 @@ from sympy.parsing.sympy_parser import parse_expr
 from sympy import And, symbols
 from icecream import ic
 
+import logging
+
+logging_level = logging.INFO
+
+# Set up logging
+logging.basicConfig(
+    level=logging_level,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+
 def pretty_print_solution(solution):
         print(json.dumps(solution, indent=4))
         
 # Define a function to calculate the Euclidean distance between two points
 def euclidean_distance(point1, point2):
     """Calculate the Euclidean distance between two n-dimensional points."""
+    logging.debug(f'Calculating Euclidean distance between {point1} and {point2}')
     return math.sqrt(sum((x - y) ** 2 for x, y in zip(point1, point2)))
 
 # Define a function to find the point in a set that is closest to a reference point using a distance function
 def closest_point(reference_point, points, distance_function=euclidean_distance):
+    logging.debug(f'Finding the closest point to {reference_point} in {points}')
     closest = None
     min_distance = float('inf')
     for point in points:
@@ -74,6 +87,7 @@ def closest_point(reference_point, points, distance_function=euclidean_distance)
         ]
 '''
 def extract_inequalities(workflow):
+    logging.debug(f'Extracting inequalities from workflow: {workflow}')
     points = []
     for node in workflow['nodes']:
         ineq = []
@@ -116,6 +130,7 @@ def extract_inequalities(workflow):
         ]
 '''
 def extract_reference_points(workflow):
+    logging.debug(f'Extracting reference points from workflow: {workflow}')
     points = []
     for node in workflow['nodes']:
         p = []
@@ -140,6 +155,7 @@ def extract_reference_points(workflow):
         ]
 '''
 def parse_inequalities(inequalities_set):
+    logging.debug(f'Parsing inequalities: {inequalities_set}')
     inequalities = []
     # Construct inequalities for each point
     for sets in inequalities_set:
@@ -179,6 +195,7 @@ def parse_inequalities(inequalities_set):
         ]
 '''
 def extract_search_space(catalog):
+    logging.debug(f'Extracting search space from catalog: {catalog}')
     search_space = []
     for service in catalog['services']:
         parameters = service['parameters']
@@ -218,6 +235,7 @@ def extract_search_space(catalog):
         NOTE: it extracts the symbols from the first node. If the symbols are different in other nodes, it will not work.
 '''
 def extract_symbols(workflow):
+    logging.debug(f'Extracting symbols from workflow: {workflow}')
     ineq_symbols = []
     # Takes a reference node and extracts the symbols from the parameters
     reference_node = workflow['nodes'][0]
@@ -249,6 +267,7 @@ def extract_symbols(workflow):
         ]
 '''
 def solve_computation_inequalities(inequalities, search_space, symbols_string):
+    logging.debug(f'Solving inequalities: {inequalities} with search space: {search_space} and symbols: {symbols_string}')
     # Define symbols for variables
     ineq_symbles = symbols(symbols_string)
     
@@ -288,6 +307,7 @@ def solve_computation_inequalities(inequalities, search_space, symbols_string):
         ]
 '''
 def find_closest_solution(reference_points, solutions, distance_function):
+    logging.debug(f'Finding the closest solution to reference points: {reference_points} in solutions: {solutions}')
     closest_solutions = []
     # Finds the closest solution to the relative reference point
     for (reference_point, solution) in (zip(reference_points, solutions)):

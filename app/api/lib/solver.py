@@ -2,8 +2,13 @@
 from icecream import ic
 import logging
 
+import logging
+
+logging_level = logging.DEBUG
+
+# Set up logging
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging_level,
     format="%(asctime)s [%(levelname)s] %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
 )
@@ -44,7 +49,6 @@ def find_closest_solution_for_type(type_workflow, type_catalog, distance_functio
     closest_solutions = find_closest_solution(reference_points, solutions, distance_function)
     
     if(VERBOSE):
-        logging.debug("Verbose mode is on")
         ic(ineq_sets)
         ic(reference_points)
         ic(inequalities)
