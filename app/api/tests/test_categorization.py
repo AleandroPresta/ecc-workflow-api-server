@@ -1,8 +1,11 @@
 import sys
-sys.path.append('app/api')
+import os
 
-from lib.inequalities_utils import pretty_print_solution
-from lib.categorizator import categorize_catalog_by_type, categorize_nodes_by_type
+# Add the parent directory of 'lib' to the sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from lib import utils
+from lib import categorizator
 
 def test_catalog():
     catalog = {
@@ -96,7 +99,7 @@ def test_catalog():
         ]
     }
     
-    solution = categorize_catalog_by_type(catalog)
+    solution = categorizator.categorize_catalog_by_type(catalog)
     return solution
 
 def test_workflow():
@@ -200,7 +203,7 @@ def test_workflow():
         ]
     }
 
-    solution = categorize_nodes_by_type(workflow)
+    solution = categorizator.categorize_nodes_by_type(workflow)
     return solution
     
 def test_both():
@@ -394,8 +397,8 @@ def test_both():
             }
         ]
     }
-    categorized_workflow = categorize_nodes_by_type(workflow)
-    categorized_catalog = categorize_catalog_by_type(catalog)
+    categorized_workflow = categorizator.categorize_nodes_by_type(workflow)
+    categorized_catalog = categorizator.categorize_catalog_by_type(catalog)
     
     return [categorized_workflow, categorized_catalog]
     
@@ -407,6 +410,7 @@ def main():
     # pretty_print_solution(solution2)
     
     solution3 = test_both()
-    pretty_print_solution(solution3)
+    utils.pretty_print_solution(solution3)
     
-main()
+if __name__ == '__main__':
+    main()

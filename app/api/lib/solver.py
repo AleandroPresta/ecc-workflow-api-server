@@ -1,13 +1,22 @@
-import sys
-sys.path.append('app/api')
-
+# Logging and debugging section
 from icecream import ic
-from colorama import Fore, Style
+import logging
 
-from lib.inequalities_utils import find_closest_solution, extract_inequalities, extract_search_space, parse_inequalities, solve_computation_inequalities, \
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+
+import sys
+  
+# append the path of the parent directory
+sys.path.append('..')
+
+from app.api.lib.utils import find_closest_solution, extract_inequalities, extract_search_space, parse_inequalities, solve_computation_inequalities, \
     extract_reference_points, extract_symbols
     
-from lib.categorizator import categorize_nodes_by_type, categorize_catalog_by_type
+from app.api.lib.categorizator import categorize_nodes_by_type, categorize_catalog_by_type
 
 '''
     This function finds the closest solution to a given workflow in the catalog. The nodes inside the
@@ -15,6 +24,7 @@ from lib.categorizator import categorize_nodes_by_type, categorize_catalog_by_ty
     Example of usage:
 '''
 def find_closest_solution_for_type(type_workflow, type_catalog, distance_function, VERBOSE):
+    logging.info("API Called: find_closest_solution_for_type")
     # Extract the points from the workflow
     ineq_sets = extract_inequalities(type_workflow)
 
@@ -34,6 +44,7 @@ def find_closest_solution_for_type(type_workflow, type_catalog, distance_functio
     closest_solutions = find_closest_solution(reference_points, solutions, distance_function)
     
     if(VERBOSE):
+        logging.debug("Verbose mode is on")
         ic(ineq_sets)
         ic(reference_points)
         ic(inequalities)
@@ -47,6 +58,7 @@ def find_closest_solution_for_type(type_workflow, type_catalog, distance_functio
     workflow by dividing the nodes by type and calling the find_closest_solution_for_type function.
 '''
 def process_workflow_catalog(workflow, catalog, distance_function, VERBOSE=False):
+    logging.info("API Called: process_workflow_catalog")
     categorized_workflow = categorize_nodes_by_type(workflow)
     categorized_catalog = categorize_catalog_by_type(catalog)
     

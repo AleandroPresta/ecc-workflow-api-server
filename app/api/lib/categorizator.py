@@ -1,8 +1,3 @@
-import sys
-sys.path.append('app/api')
-
-from lib.inequalities_utils import pretty_print_solution
-
 '''
     This function takes a workflow and categorizes the nodes by their type.
     Example of usage:
