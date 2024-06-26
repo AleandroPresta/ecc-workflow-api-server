@@ -6,15 +6,6 @@ from icecream import ic
 
 import logging
 
-logging_level = logging.INFO
-
-# Set up logging
-logging.basicConfig(
-    level=logging_level,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
-
 def pretty_print_solution(solution):
         print(json.dumps(solution, indent=4))
         

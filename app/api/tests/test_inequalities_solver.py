@@ -1,23 +1,6 @@
 import sys
 import os
 
-import logging
-
-logging_level = logging.INFO
-
-# Set up logging
-logging.basicConfig(
-    level=logging_level,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
-
-# Check if the logging level is set to DEBUG
-if (logging_level == logging.DEBUG):
-    VERBOSE = True
-else:
-    VERBOSE = False
-
 # Add the parent directory of 'lib' to the sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 

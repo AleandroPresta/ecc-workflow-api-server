@@ -4,26 +4,7 @@ import os
 # Add the parent directory of 'lib' to the sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from lib import utils
 from lib import categorizator
-
-import logging
-
-logging_level = logging.DEBUG
-
-# Set up logging
-logging.basicConfig(
-    level=logging_level,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
-
-# Check if the logging level is set to DEBUG
-if (logging_level == logging.DEBUG):
-    VERBOSE = True
-else:
-    VERBOSE = False
-
 
 def test_catalog():
     catalog = {
@@ -422,13 +403,10 @@ def test_both():
     
 def main():
     solution1 = test_workflow()
-    # pretty_print_solution(solution1)
     
     solution2 = test_catalog()
-    # pretty_print_solution(solution2)
     
     solution3 = test_both()
-    utils.pretty_print_solution(solution3)
-    
+
 if __name__ == '__main__':
     main()
