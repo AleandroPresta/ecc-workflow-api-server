@@ -4,12 +4,6 @@ import json
 from .lib.workflow_catalog_evaluator import compare_workflow_and_catalog
 import logging
 
-logging.basicConfig(
-    level=logging.info,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
-
 # Print data posted to the server
 @api_view(['POST'])
 def process_post_data(request):
