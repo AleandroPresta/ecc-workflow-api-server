@@ -13,7 +13,7 @@ def process_post_data(request):
     
     catalog = request_body[1]
     
-    result = None # TODO add implementation using Strategy Pattern
+    result = None # TODO import implementation using Strategy Pattern
     # pretty_request_body = json.dumps(request_body, indent=4)
         
     # Define response
