@@ -1,7 +1,6 @@
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
 import json
-from .lib.workflow_catalog_evaluator import compare_workflow_and_catalog
 import logging
 
 # Print data posted to the server
@@ -14,7 +13,7 @@ def process_post_data(request):
     
     catalog = request_body[1]
     
-    result = compare_workflow_and_catalog(workflow, catalog)
+    result = None # TODO add implementation using Strategy Pattern
     # pretty_request_body = json.dumps(request_body, indent=4)
         
     # Define response
