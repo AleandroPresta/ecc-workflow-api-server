@@ -1,6 +1,6 @@
-from SolvingStrategy import SolvingStrategy
+from .SolvingStrategy import SolvingStrategy
 import logging
-import Categorizator
+from . import Categorizator
 import utils
 from icecream import ic
 
@@ -10,7 +10,7 @@ class InequalitiesStrategy(SolvingStrategy):
         self.distance_function = distance_function
         self.VERBOSE = VERBOSE
     
-    def solve(self, workflow, catalog) -> None:
+    def solve(self, workflow, catalog) -> dict:
         logging.info("API Called: process_workflow_catalog")
         categorized_workflow = Categorizator.categorize_nodes_by_type(workflow)
         categorized_catalog = Categorizator.categorize_catalog_by_type(catalog)
