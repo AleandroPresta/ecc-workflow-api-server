@@ -96,12 +96,12 @@ aws_catalog = {
             },
             {
                 "name": "AWS IoT Greengrass",
-                "id": 8,
+                "id": 9,
                 "type": "Computation",
             },
             {
                 "name": "AWS Glue",
-                "id": 9,
+                "id": 10,
                 "type": "Computation",
             },
         ]
