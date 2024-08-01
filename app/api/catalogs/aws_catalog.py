@@ -58,8 +58,17 @@ aws_catalog = {
                 to large-scale data ingestion."""
             },
             {
-                "name" : "Cloud Component",
+                "name": "DocumentDB",
                 "id": 5,
+                "type": "Storage",
+                "parameters": {
+                    "Type": "JSON",
+                    "Available Memory": 1200, # Memory size in MB
+                },
+            },
+            {
+                "name" : "Cloud Component",
+                "id": 6,
                 "type": "Computation",
                 "parameters": {
                     "Execution Time": 100, # Execution time in ms
@@ -67,7 +76,7 @@ aws_catalog = {
             },
             {
                 "name": "Amazon SageMaker",
-                "id": 3,
+                "id": 7,
                 "type": "Computation",
                 "parameters": {
                     "ML": "Yes",
@@ -75,6 +84,9 @@ aws_catalog = {
                 "description": """Amazon SageMaker is a fully managed service that brings 
                 together a broad set of tools to enable high-performance, 
                 low-cost machine learning (ML) for any use case."""
+            },
+            {
+                "name": ""
             }
         ]
     }
