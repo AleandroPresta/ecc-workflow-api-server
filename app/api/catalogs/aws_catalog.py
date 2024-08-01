@@ -75,8 +75,17 @@ aws_catalog = {
                 },    
             },
             {
-                "name": "Amazon SageMaker",
+                "name" : "ML Component",
                 "id": 7,
+                "type": "Computation",
+                "parameters": {
+                    "Execution Time": 100, # Execution time in ms
+                    "ML": "Yes",
+                },    
+            },
+            {
+                "name": "Amazon SageMaker",
+                "id": 8,
                 "type": "Computation",
                 "parameters": {
                     "ML": "Yes",
@@ -86,8 +95,15 @@ aws_catalog = {
                 low-cost machine learning (ML) for any use case."""
             },
             {
-                "name": ""
-            }
+                "name": "AWS IoT Greengrass",
+                "id": 8,
+                "type": "Computation",
+            },
+            {
+                "name": "AWS Glue",
+                "id": 9,
+                "type": "Computation",
+            },
         ]
     }
 }
