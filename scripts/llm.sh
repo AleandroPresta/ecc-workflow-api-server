@@ -6,7 +6,7 @@ curl -X GET http://localhost:8000/api/v1/
 
 # Test the LLM solver endpoint with trailing slash
 echo -e "\n\nTesting LLM solver endpoint..."
-curl -X POST http://localhost:8000/api/v1/solve/llm/ \
+curl -X POST http://localhost:8000/api/v1/solve/llm \
   -H "Content-Type: application/json" \
   -d '[
     {
