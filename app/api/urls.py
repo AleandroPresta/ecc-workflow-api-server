@@ -2,5 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.process_post_data),
+    path('', ),
+    path('solve_with_llm', views.solve_with_llm),
 ]

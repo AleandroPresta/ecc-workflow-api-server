@@ -5,9 +5,9 @@ import logging
 from icecream import ic
 from .solving_strategy.WorkflowServiceOptimizerFacade import WorkflowServiceOptimizerFacade
 
-@api_view(['GET','POST'])
-def process_post_data(request):
-    logging.info("API Called: process_post_data")
+@api_view(['GET', 'POST'])
+def solve_with_llm(request):
+    logging.info("API Called: solve_with_llm")
     
     request_body = json.loads(request.body)
     ic(request_body)
