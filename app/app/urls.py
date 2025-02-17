@@ -24,5 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage),
     path('docs/', views.docs),
-    path('api/compare', include('api.urls')),
+    path('api/v1/', include('api.urls')),
 ]
