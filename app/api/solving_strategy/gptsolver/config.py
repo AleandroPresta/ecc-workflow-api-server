@@ -2,9 +2,9 @@ model_config: dict = {
     # Takes the model choice from the command line argument
     "SELECTED_MODEL": 3,
     "MODEL_CHOICES" : {
-        '1': "gpt-3.5-turbo", # Default model
-        '2': "gpt-4o",
-        '3': "o1-mini"
+        1: "gpt-3.5-turbo", # Default model
+        2: "gpt-4o",
+        3: "o1-mini"
     },
     # Number of services to be generated for each abstract service (default: 5)
     "N_OF_SERVICES": 5,

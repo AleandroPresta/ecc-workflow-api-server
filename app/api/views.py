@@ -2,8 +2,7 @@ from rest_framework.decorators import api_view
 from django.http import JsonResponse
 import json
 import logging
-from icecream import ic
-from .solving_strategy.WorkflowServiceOptimizerFacade import WorkflowServiceOptimizerFacade
+from .solving_strategy.LLMStrategy import LLMStrategy
 
 @api_view(['GET', 'POST'])
 def home(request):
@@ -26,10 +25,15 @@ def solve_with_llm(request):
     
     request_body = json.loads(request.body)
     
+    workflow: dict = request_body[0]
+    catalog: dict = request_body[1]
+    
+    strategy = LLMStrategy()
+    
     response = JsonResponse(
         {
             'message': 'Solving with LLM',
-            'request_body': request_body
+            'request_body': strategy.solve(workflow, catalog)
         }, 
         status=200
     )
