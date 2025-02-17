@@ -4,7 +4,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 model_config: dict = {
-    "SELECTED_MODEL": 3,
+    "SELECTED_MODEL": 1,
     "MODEL_CHOICES": {
         1: "gpt-3.5-turbo",
         2: "gpt-4o", 

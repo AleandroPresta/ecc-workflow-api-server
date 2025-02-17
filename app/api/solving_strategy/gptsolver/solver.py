@@ -1,6 +1,7 @@
 from .config import model_config as config
 import json
 
+from .prompter import ServicePromptGenerator
 from .caller import GptCaller
 
 """
@@ -30,4 +31,18 @@ def solve(workflow: dict, catalog: dict):
     
     performance: dict = setupFiles(config["PERFORMANCE_PATH"])
     
-    return "Solved workflow using llm model"
+    prompt: str = ServicePromptGenerator(
+        catalog=catalog,
+        workflow=workflow,
+        performance=performance,
+        use_tags=use_tags,
+        n=n_of_generated_services
+    ).get_prompt()
+    
+    # Call the GPT API
+    response = gpt_caller.call(developer_text=config["DEVELOPER_TEXT"], user_text=prompt)
+    
+    # Get the result from the response
+    result = response.choices[0].message.content
+    
+    return result
