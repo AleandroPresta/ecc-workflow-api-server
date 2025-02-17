@@ -17,7 +17,7 @@ def process_post_data(request):
     distance_function = None
     VERBOSE = False
     facade = WorkflowServiceOptimizerFacade(distance_function=distance_function, VERBOSE=VERBOSE)
-    result = facade.findOptimalServices(workflow=workflow, catalog=catalog, solver_type="inequalities")
+    result = facade.findOptimalServices(workflow=workflow, catalog=catalog, solver_type="llm")
     ic(result)
     response = JsonResponse(
         {
