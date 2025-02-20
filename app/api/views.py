@@ -3,6 +3,7 @@ from django.http import JsonResponse
 import json
 import logging
 from .solving_strategy.LLMStrategy import LLMStrategy
+from django.urls import path
 
 @api_view(['GET', 'POST'])
 def home(request):
@@ -20,8 +21,8 @@ def home(request):
     return response
 
 @api_view(['GET', 'POST'])
-def solve_with_llm(request):
-    logging.info("API Called: solve_with_llm")
+def solve_with_llm(request, model_id):
+    logging.info(f"API Called: solve_with_llm with model_id: {model_id}")
     
     request_body = json.loads(request.body)
     
@@ -33,7 +34,7 @@ def solve_with_llm(request):
     response = JsonResponse(
         {
             'message': 'Solving with LLM',
-            'request_body': strategy.solve(workflow, catalog)
+            'request_body': strategy.solve(workflow, catalog, model_id)
         }, 
         status=200
     )

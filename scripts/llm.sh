@@ -802,9 +802,12 @@ catalog='
 }
 '
 
+model_id=$1
+
 # Test the LLM solver endpoint with trailing slash
-echo -e "\n\nTesting LLM solver endpoint..."
-curl -X POST http://localhost:8000/api/v1/solve/llm \
+echo -e "\n\n[INFO] Testing LLM solver endpoint..."
+echo -e "\n\n[DEBUG] Model ID: $model_id"
+curl -X POST http://localhost:8000/api/v1/solve/llm/$model_id \
   -H "Content-Type: application/json" \
   -d "[
     $workflow,

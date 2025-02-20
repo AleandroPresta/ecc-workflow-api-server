@@ -5,5 +5,5 @@ app_name = 'api'
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('solve/llm', views.solve_with_llm),
+    path('solve/llm/<int:model_id>', views.solve_with_llm),
 ]
