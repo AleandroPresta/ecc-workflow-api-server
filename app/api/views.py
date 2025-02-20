@@ -33,7 +33,7 @@ def solve_with_llm(request):
     response = JsonResponse(
         {
             'message': 'Solving with LLM',
-            'request_body': strategy.solve(workflow, catalog)
+            'request_body': strategy.solve(workflow, catalog, 1)
         }, 
         status=200
     )
